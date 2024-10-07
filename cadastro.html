@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Cadastro</title>
+
+    <!-- Firebase App (necessário) -->
+    <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js"></script>
+    <!-- Firebase Authentication -->
+    <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js"></script>
+
+    <style>
+        @font-face {
+            font-family: 'Raleway-Regular';
+            src: url('./fonts/Raleway-Regular.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Raleway-Bold';
+            src: url('./fonts/Raleway-Bold.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Raleway-SemiBold';
+            src: url('./fonts/Raleway-SemiBold.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Raleway-Medium';
+            src: url('./fonts/Raleway-Medium.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Montserrat-Medium';
+            src: url('./fonts/Montserrat-Medium.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Montserrat-SemiBold';
+            src: url('./fonts/Montserrat-SemiBold.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Montserrat-Regular';
+            src: url('./fonts/Montserrat-Regular.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Montserrat-Bold';
+            src: url('./fonts/Montserrat-Bold.ttf') format('truetype');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1b0048, #22004d, #2e2e2e);
+        }
+
+        .parte1 {
+            position: relative;
+            width: 80%;
+            height: 100vh;
+        }
+
+        .parte1::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url("sandro-katalina-k1bO_VTiZSs-unsplash (2) 1.png");
+            background-size: cover;
+            background-position: 60% 50%;
+            filter: blur(15px);
+            mask-image: radial-gradient(circle, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 1) 80%);
+            z-index: 1;
+        }
+
+        .parte1 img.background-img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 60% 50%;
+        }
+
+        .parte1 img.logo-img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 24%;
+            z-index: 2;
+        }
+
+        .main1 {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            transform: scale(0.8);
+            z-index: 2;
+            color: white;
+            border-radius: 30px;
+            position: relative;
+        }
+
+        .form {
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+            z-index: 3;
+        }
+
+        .text h3 {
+            font-family: 'Montserrat-Bold';
+            font-size: 30px;
+        }
+
+        .text p {
+            margin-bottom: 32px;
+            font-family: 'Raleway-Medium';
+        }
+
+        .form-controle__label p {
+            font-family: 'Raleway-Medium';
+        }
+
+        .form-controle {
+            height: 52px;
+            border: 1px solid #6b7280;
+            padding: 18px 20px;
+            border-radius: 12px;
+            background-color: #fff;
+            color: #4b496c;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .botoes button {
+            width: 100%;
+            height: 50px;
+            border-radius: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Montserrat-SemiBold';
+        }
+
+        .botao1 {
+            color: white;
+            background-color: #9F3EFC;
+        }
+
+        .botao2 {
+            margin-top: 10px;
+            background-color: #d5d5d5;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="parte1">
+        <img src="sandro-katalina-k1bO_VTiZSs-unsplash (2) 1.png" alt="Fundo" class="background-img">
+        <img src="logoPuthypeOf (1) (1).png" alt="Logo" class="logo-img">
+    </div>
+
+    <main class="main1">
+        <section class="form">
+            <div class="text">
+                <h3>Cadastrar</h3>
+                <p>Preencha os campos abaixo para criar sua conta</p>
+            </div>
+            <form class="form1" id="cadastroForm">
+                <label class="form-controle__label">
+                    <p>Nome</p>
+                </label>
+                <input type="text" id="nome" class="form-controle" required>
+                <label class="form-controle__label">
+                    <p>Email</p>
+                </label>
+                <input type="email" id="email" class="form-controle" required>
+                <label class="form-controle__label">
+                    <p>Senha</p>
+                </label>
+                <input type="password" id="senha" class="form-controle" required>
+                <label class="form-controle__label">
+                    <p>Confirme a Senha</p>
+                </label>
+                <input type="password" id="confirmaSenha" class="form-controle" required>
+                <div class="botoes">
+                    <button class="botao1" type="submit">
+                        CADASTRAR
+                    </button>
+                    <button type="button" class="botao2" onclick="window.location.href='Login.html'">
+                        Voltar para Login
+                    </button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        // Configuração do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBiAjNdeJhe02tdmF5xgdbybqCWurWVKzg",
+            authDomain: "puthype-6fd16.firebaseapp.com",
+            projectId: "puthype-6fd16",
+            storageBucket: "puthype-6fd16.appspot.com",
+            messagingSenderId: "135654081054",
+            appId: "1:135654081054:web:72271c801ea8c7fbdc240f"
+        };
+
+        // Inicializa o Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // Seleciona o formulário
+        const form = document.getElementById('cadastroForm');
+
+        // Adiciona o evento de envio do formulário
+        form.addEventListener('submit', (e) => {
+            e.preventDefault(); // Impede o comportamento padrão do formulário
+
+            // Obtém os valores dos campos do formulário
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+            const confirmaSenha = document.getElementById('confirmaSenha').value;
+
+            // Verifica se as senhas coincidem
+            if (senha !== confirmaSenha) {
+                alert('As senhas não coincidem.');
+                return;
+            }
+
+            // Cria o usuário no Firebase Authentication
+            auth.createUserWithEmailAndPassword(email, senha)
+                .then((userCredential) => {
+                    // Usuário criado com sucesso
+                    const user = userCredential.user;
+                    alert('Usuário cadastrado com sucesso: ' + user.email);
+                    console.log('Usuário cadastrado:', user);
+
+                    // Opcional: redirecionar para outra página após o cadastro
+                    // window.location.href = 'pagina_de_sucesso.html';
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert('Erro ao cadastrar: ' + errorMessage);
+                });
+        });
+    </script>
+
+</body>
+
+</html>
